@@ -1,10 +1,10 @@
 name: appfigurateflutter
 description: Appfigurate SDK flutter plugin
-version: 3.0.0
+version: 3.1.0
 homepage: https://www.electricbolt.co.nz
 
 environment:
-  sdk: ">=2.16.2 <3.0.0"
+  sdk: ">=2.16.2 <4.0.0"
   flutter: ">=2.5.0"
 
 dependencies:
