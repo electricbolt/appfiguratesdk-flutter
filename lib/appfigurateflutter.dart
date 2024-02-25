@@ -247,9 +247,7 @@ abstract class APLNativeConfiguration {
 
   /// Called when an [action] is executed.
 
-  void actionExecuted(String action) {
-  }
-
+  void actionExecuted(String action) {}
 }
 
 //------------------------------------------------------------------------------
