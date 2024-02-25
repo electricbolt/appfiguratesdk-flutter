@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'appfigurateflutter'
-  s.version          = '3.1.0'
+  s.version          = '3.1.3'
   s.module_name      = 'AppfigurateFlutter'
   s.summary          = 'Appfigurate SDK flutter plugin'
   s.description      = <<-DESC
