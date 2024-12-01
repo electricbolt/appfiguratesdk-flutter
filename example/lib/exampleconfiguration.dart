@@ -1,5 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'dart:io';
+
 import 'package:appfigurateflutter/appfigurateflutter.dart';
 
 class ExampleConfiguration extends APLNativeConfiguration {
@@ -9,7 +11,7 @@ class ExampleConfiguration extends APLNativeConfiguration {
 
   ExampleConfiguration._internal();
   
-  bool get boolean => nativeBool('boolean');
+  bool get boolean => nativeBool(Platform.isAndroid ? 'bool' : 'boolean');
 
   String get string_Textfield => nativeString('string_Textfield');
 

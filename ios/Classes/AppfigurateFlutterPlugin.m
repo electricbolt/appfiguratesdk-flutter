@@ -1,7 +1,5 @@
-/*******************************************************************************
- * AppfigurateFlutterPlugin.m                                                  *
- * Appfigurate Copyright © 2022; Electric Bolt Limited.                        *
- ******************************************************************************/
+// AppfigurateFlutterPlugin.m
+// Appfigurate™ Copyright© 2022-2024; Electric Bolt Limited.
 
 #import "AppfigurateFlutterPlugin.h"
 @import AppfigurateLibrary;

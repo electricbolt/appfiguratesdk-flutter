@@ -1,5 +1,5 @@
 PODS:
-  - appfigurateflutter (3.1.3):
+  - appfigurateflutter (3.2.1):
     - Flutter
   - Flutter (1.0.0)
 
@@ -14,9 +14,9 @@ EXTERNAL SOURCES:
     :path: Flutter
 
 SPEC CHECKSUMS:
-  appfigurateflutter: fe098a4da0071f5ce82eb92140813dc9fd9189d4
+  appfigurateflutter: 92a861537e80d792546d069c35676059136e109e
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
 
 PODFILE CHECKSUM: 1a782344d33c12ced0182eeab11e8668d253eb48
 
-COCOAPODS: 1.13.0
+COCOAPODS: 1.16.2

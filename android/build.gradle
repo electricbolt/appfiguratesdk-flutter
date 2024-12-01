@@ -1,5 +1,5 @@
 group 'nz.co.electricbolt.appfigurateflutter'
-version '3.1.0'
+version '3.2.1'
 
 buildscript {
     repositories {
@@ -9,7 +9,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.0'
+        classpath 'com.android.tools.build:gradle:8.7.2'
     }
 }
 
@@ -24,7 +24,9 @@ rootProject.allprojects {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 34
+
+    namespace = "nz.co.electricbolt.appfigurateflutter"
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:appfigurateflutter/appfigurateflutter.dart';
 import 'package:appfigurateflutter_example/exampleconfiguration.dart';
 import 'package:flutter/material.dart';
@@ -65,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
           padding: EdgeInsets.only(left: padding, right: padding),
           children: [
             ListTile(
-              title: const Text('boolean'),
+              title: Text(Platform.isAndroid ? 'bool' : 'boolean'),
               subtitle:
               Text(ExampleConfiguration().boolean ? 'true' : 'false'),
             ),
