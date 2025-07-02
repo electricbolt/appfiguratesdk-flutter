@@ -1,24 +1,30 @@
 #
-# To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html.
-# Run `pod lib lint appfigurateflutter.podspec` to validate before publishing.
+# `pod cache clean --all`
+# `pod lib lint appfigurateflutter.podspec`
 #
+
 Pod::Spec.new do |s|
-  s.name             = 'appfigurateflutter'
-  s.version          = '3.2.1'
-  s.module_name      = 'AppfigurateFlutter'
-  s.summary          = 'Appfigurate SDK flutter plugin'
-  s.description      = <<-DESC
-Appfigurate SDK flutter plugin
-                       DESC
-  s.homepage         = 'https://github.com/electricbolt/appfiguratesdk'
-  s.license          = { :file => '../LICENSE' }
-  s.author           = { 'Electric Bolt Limited' => 'support@electricbolt.co.nz' }
-  s.source           = { :path => '.' }
-  s.source_files = 'Classes/AppfigurateFlutterPlugin.m'
-  s.public_header_files = 'Classes/AppfigurateFlutterPlugin.h'
-  s.dependency 'Flutter'
+  s.name                = 'appfigurateflutter'
+  s.version             = '3.2.2'
+  s.module_name         = 'AppfigurateFlutter'
+  s.summary             = 'Appfigurate SDK Flutter Plugin'
+
+  s.description         = <<-DESC
+# Appfigurate™ Flutter Example
+Demonstrates how to integrate Appfigurate SDK into a Flutter iOS and Android app.
+Documentation for Appfigurate is available at https://docs.electricbolt.co.nz
+Appfigurate is a trademark of Electric Bolt, registered in New Zealand.
+DESC
+
+  s.homepage            = 'https://github.com/electricbolt/appfiguratesdk'
+  s.license             = { :type => 'Proprietary', :file => '../LICENSE.md' }
+  s.author              = { 'Electric Bolt Limited' => 'support@electricbolt.co.nz' }
+  s.source              = { :git => 'https://github.com/electricbolt/appfiguratesdk-flutter.git' }
+  s.public_header_files = 'appfigurateflutter/Sources/appfigurateflutter/include/appfigurateflutter/AppfigurateFlutterPlugin.h'
+  s.source_files        = 'appfigurateflutter/Sources/appfigurateflutter/**/*.{h,m}'
   s.vendored_frameworks = 'AppfigurateLibrary.xcframework'
-  s.platform = :ios, '13.0'
+  s.platform            = :ios, '13.0'
+  s.dependency          'Flutter'
 
   # Flutter.framework does not contain a i386 slice.
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }

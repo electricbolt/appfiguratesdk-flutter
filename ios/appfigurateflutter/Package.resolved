@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "appfiguratesdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/electricbolt/appfiguratesdk",
+      "state" : {
+        "revision" : "28fa783da815db48e8f6a652454b7115cb2ee7f7",
+        "version" : "3.2.1"
+      }
+    }
+  ],
+  "version" : 2
+}

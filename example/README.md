@@ -1,16 +1,7 @@
-# appfigurateflutter_example
+# Appfigurate™ Flutter Example
 
-Demonstrates how to use the appfigurateflutter plugin.
+Demonstrates how to integrate Appfigurate SDK into a [Flutter iOS and Android app](https://docs.electricbolt.co.nz/getting-started/examples#flutter).
 
-## Getting Started
+Documentation for Appfigurate is available at [docs.electricbolt.co.nz](https://docs.electricbolt.co.nz).
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Appfigurate is a trademark of [Electric Bolt](https://www.electricbolt.co.nz), registered in New Zealand.
