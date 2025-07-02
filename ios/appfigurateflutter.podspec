@@ -17,7 +17,7 @@ Appfigurate is a trademark of Electric Bolt, registered in New Zealand.
 DESC
 
   s.homepage            = 'https://github.com/electricbolt/appfiguratesdk'
-  s.license             = { :type => 'Proprietary', :file => '../LICENSE.md' }
+  s.license             = { :type => 'Proprietary', :file => '../LICENSE' }
   s.author              = { 'Electric Bolt Limited' => 'support@electricbolt.co.nz' }
   s.source              = { :git => 'https://github.com/electricbolt/appfiguratesdk-flutter.git' }
   s.public_header_files = 'appfigurateflutter/Sources/appfigurateflutter/include/appfigurateflutter/AppfigurateFlutterPlugin.h'
