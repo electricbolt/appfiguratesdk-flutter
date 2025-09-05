@@ -5,7 +5,7 @@
 
 Pod::Spec.new do |s|
   s.name                = 'appfigurateflutter'
-  s.version             = '3.2.2'
+  s.version             = '4.0.2'
   s.module_name         = 'AppfigurateFlutter'
   s.summary             = 'Appfigurate SDK Flutter Plugin'
 
@@ -23,7 +23,7 @@ DESC
   s.public_header_files = 'appfigurateflutter/Sources/appfigurateflutter/include/appfigurateflutter/AppfigurateFlutterPlugin.h'
   s.source_files        = 'appfigurateflutter/Sources/appfigurateflutter/**/*.{h,m}'
   s.vendored_frameworks = 'AppfigurateLibrary.xcframework'
-  s.platform            = :ios, '13.0'
+  s.platform            = :ios, '15.0'
   s.dependency          'Flutter'
 
   # Flutter.framework does not contain a i386 slice.

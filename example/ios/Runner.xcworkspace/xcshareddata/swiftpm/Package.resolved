@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/electricbolt/appfiguratesdk.git",
       "state" : {
-        "revision" : "28fa783da815db48e8f6a652454b7115cb2ee7f7",
-        "version" : "3.2.1"
+        "revision" : "7aabb1c06d1c916bc7d298661f81279515b2f012",
+        "version" : "4.0.2"
       }
     }
   ],

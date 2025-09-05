@@ -6,13 +6,13 @@ import PackageDescription
 let package = Package(
     name: "AppfigurateFlutter",
     platforms: [
-        .iOS("13.0"),
+        .iOS("15.0"),
     ],
     products: [
         .library(name: "appfigurateflutter", targets: ["appfigurateflutter"])
     ],
     dependencies: [
-        .package(url: "https://github.com/electricbolt/appfiguratesdk", exact: "3.2.1")
+        .package(url: "https://github.com/electricbolt/appfiguratesdk", exact: "4.0.2")
     ],
     targets: [
         .target(

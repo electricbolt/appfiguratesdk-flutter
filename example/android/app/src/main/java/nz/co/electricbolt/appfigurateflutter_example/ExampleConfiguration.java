@@ -1,7 +1,9 @@
-// ExampleConfiguration.dart
-// AppfigurateExample Copyright © 2018; Electric Bolt Limited.
+// ExampleConfiguration.java
+// FlutterExample Copyright © 2022-2025; Electric Bolt Limited.
 
 package nz.co.electricbolt.appfigurateflutter_example;
+
+import androidx.annotation.NonNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,18 +26,26 @@ import nz.co.electricbolt.appfiguratelibrary.annotations.IntPropertyEdit;
 import nz.co.electricbolt.appfiguratelibrary.annotations.IntPropertyList;
 import nz.co.electricbolt.appfiguratelibrary.annotations.IntPropertyListEdit;
 import nz.co.electricbolt.appfiguratelibrary.annotations.IntPropertySlider;
+import nz.co.electricbolt.appfiguratelibrary.annotations.RemoteBooleanProperty;
+import nz.co.electricbolt.appfiguratelibrary.annotations.RemoteDoublePropertyEdit;
+import nz.co.electricbolt.appfiguratelibrary.annotations.RemoteIntPropertyEdit;
+import nz.co.electricbolt.appfiguratelibrary.annotations.RemoteStringPropertyEdit;
 import nz.co.electricbolt.appfiguratelibrary.annotations.StringPropertyEdit;
 import nz.co.electricbolt.appfiguratelibrary.annotations.StringPropertyList;
 import nz.co.electricbolt.appfiguratelibrary.annotations.StringPropertyListEdit;
 
 public class ExampleConfiguration extends Configuration {
 
+    public static ExampleConfiguration CONFIGURATION() {
+        return (ExampleConfiguration) Configuration.sharedConfiguration();
+    }
+
     // region boolean
 
     @BooleanProperty(description = "boolean - Boolean true or false")
     public boolean bool;
 
-    // endregion boolean
+    // endregion  boolean
 
     // region String
 
@@ -46,23 +56,45 @@ public class ExampleConfiguration extends Configuration {
     public String getString_RegexTextfield() {
         return _string_RegexTextfield;
     }
+
     public void setString_RegexTextfield(String value) {
         _string_RegexTextfield = value;
     }
+
     private String _string_RegexTextfield;
 
-    @StringPropertyList(description = "String - fixed list", keys = {"Small", "Medium", "Large"},
-            values = {"sm", "md", "lg"})
+    @StringPropertyList(description = "String - fixed list", keys = {
+            "{PVT,DEV}Small",
+            "Medium",
+            "{TEST}Large"
+    }, values = {
+            "sm",
+            "md",
+            "lg"
+    })
     String string_List;
 
-    @StringPropertyListEdit(description = "String - textfield, customizable list", keys = {"Red", "Green", "Blue"},
-            values = {"r", "g", "b"})
+    @StringPropertyListEdit(description = "String - textfield, customizable list", keys = {
+            "{DEV}Red",
+            "Green",
+            "{pvt,TEST}Blue"
+    }, values = {
+            "r",
+            "g",
+            "b"
+    })
     String string_Textfield_List;
 
     @StringPropertyListEdit(description = "String - textfield with regex, customizable list",
-            regularExpression = "https://[\\w\\.-]+\\.electricbolt.co.nz/.*", keys = {"Dev", "Test", "Prod"},
-            values = {"https://dev.electricbolt.co.nz/list", "https://test.electricbolt.co.nz/list",
-                    "https://m.electricbolt.co.nz/list"})
+            regularExpression = "https://[\\w\\.-]+\\.electricbolt.co.nz/.*", keys = {
+            "{DEV}Dev",
+            "{TEST}Test",
+            "{PVT}Prod"
+    }, values = {
+            "https://dev.electricbolt.co.nz/list",
+            "https://test.electricbolt.co.nz/list",
+            "https://m.electricbolt.co.nz/list"
+    })
     String string_RegexTextfield_List;
 
     // endregion String
@@ -76,21 +108,9 @@ public class ExampleConfiguration extends Configuration {
     static Map<String, String> _encrypted_string_Textfield_ListValues = new HashMap<>();
 
     static {
-        _encrypted_string_Textfield_ListValues.put("Red", BuildConfig.ENCRYPTED ?
-                "3/iZZ1Gv8EniGIkIoUzLdJI8SN8tGjus/jGanA6kRM+afnCJYI4E/6Nc1CWK7eIAJBuZRceU6rtlY/OPTSubV4kLQkf/I4gN4pdrC0"
-                        + "T8wZSI6uq7xSWk3nfGG6Ujh5sopOpvseCfg+TaTCfYgEgBwlCuxKZICMNH36BZT41v14foSG8AiGjXVcyQ1eYhY9SxQS"
-                        + "d8ZsrQhUyyVcInsuJP3GK20yOg2yQjsbOHD3OfkI+adP5M7Y3B7oC/1sPz+CK2" + "ZNhnOMSTeIl3NpfH6YhSkg2Oh"
-                        + "5GTZI2cNAGYxPVTgF6/oCCmky8pgZwQFkh7KKqlKKWEB8Mec5emzr2I3IFF8nNQcsX0ck2sGNClqWXY3ysB" : "r");
-        _encrypted_string_Textfield_ListValues.put("Green", BuildConfig.ENCRYPTED ?
-                "PkQfHwaWmK94u9eB9mCfWmOk/vOIOacKivt1lptgJbUzUl2e8pmRnSVLkCeYxoSjPgKEx94t6e/BRhtgMbZyXoo2usUH5jdxaA8Hko"
-                        + "UtR4VuMHuZ4Gla+kyuNg1Ki6LC+xAD++dESITzX4EqCCCfVV/qv5u5c9NJYrc7TwNN8bXtVJ6+8hEQeWXdk/05p0wCDj"
-                        + "x8hIl+wfmjbKOYwl35mQMW/4EM7SEYFqExxMsR/dcHJG4X0Mw03hEfdqL9nk0anMEyx8ez03WmR8TiZg4UqpbARr6i8I"
-                        + "UYx6pMr2ZJjQUzllvTxGpT84VetpN1tvp/Ys+ygtOODZuSp3MjpG0M/tiyGe8g7gNIdauWxN1afdgB" : "g");
-        _encrypted_string_Textfield_ListValues.put("Blue", BuildConfig.ENCRYPTED ?
-                "jaIxDwexYEFUlmoG8QsdKYbj/g2zZWL0q5gmeWGCuLOwXvUHdB0CU7i4v/55LEi3UuN7L9Yj4zjWX//WZB0HFn5+9NZ8IG9xoc+uE+"
-                        + "vDMbxAKaqjA5IfJM38eVl0DK/hp0le3qOG11sd+GXoSXSDiwKWGoi" + "hqYZ6GUzgDTx8f2OlhqG/SUlm/jADLUNJj"
-                        + "K8czZ8fY+Fx75cj7OTlOl+nikFoE5BkR3exOYkeCmAY2KgCYyJQn2w3yaBS0tGafUjAIHIHITodrjG+IbjZLhZyG2/jx"
-                        + "kMjLNDs0GCWH6vh+mQ9h6Iwzq3UIZnK9zUn2D4cZV5I2StjPpPdAkGrsdIv0L/bQJZjAnidQIWOC5iB7poB" : "b");
+        _encrypted_string_Textfield_ListValues.put("{DEV}Red", BuildConfig.ENCRYPTED ? "3/iZZ1Gv8EniGIkIoUzLdJI8SN8tGjus/jGanA6kRM+afnCJYI4E/6Nc1CWK7eIAJBuZRceU6rtlY/OPTSubV4kLQkf/I4gN4pdrC0T8wZSI6uq7xSWk3nfGG6Ujh5sopOpvseCfg+TaTCfYgEgBwlCuxKZICMNH36BZT41v14foSG8AiGjXVcyQ1eYhY9SxQSd8ZsrQhUyyVcInsuJP3GK20yOg2yQjsbOHD3OfkI+adP5M7Y3B7oC/1sPz+CK2ZNhnOMSTeIl3NpfH6YhSkg2Oh5GTZI2cNAGYxPVTgF6/oCCmky8pgZwQFkh7KKqlKKWEB8Mec5emzr2I3IFF8nNQcsX0ck2sGNClqWXY3ysB" : "r");
+        _encrypted_string_Textfield_ListValues.put("{PVT}Green", BuildConfig.ENCRYPTED ? "PkQfHwaWmK94u9eB9mCfWmOk/vOIOacKivt1lptgJbUzUl2e8pmRnSVLkCeYxoSjPgKEx94t6e/BRhtgMbZyXoo2usUH5jdxaA8HkoUtR4VuMHuZ4Gla+kyuNg1Ki6LC+xAD++dESITzX4EqCCCfVV/qv5u5c9NJYrc7TwNN8bXtVJ6+8hEQeWXdk/05p0wCDjx8hIl+wfmjbKOYwl35mQMW/4EM7SEYFqExxMsR/dcHJG4X0Mw03hEfdqL9nk0anMEyx8ez03WmR8TiZg4UqpbARr6i8IUYx6pMr2ZJjQUzllvTxGpT84VetpN1tvp/Ys+ygtOODZuSp3MjpG0M/tiyGe8g7gNIdauWxN1afdgB" : "g");
+        _encrypted_string_Textfield_ListValues.put("{TEST}Blue", BuildConfig.ENCRYPTED ? "jaIxDwexYEFUlmoG8QsdKYbj/g2zZWL0q5gmeWGCuLOwXvUHdB0CU7i4v/55LEi3UuN7L9Yj4zjWX//WZB0HFn5+9NZ8IG9xoc+uE+vDMbxAKaqjA5IfJM38eVl0DK/hp0le3qOG11sd+GXoSXSDiwKWGoihqYZ6GUzgDTx8f2OlhqG/SUlm/jADLUNJjK8czZ8fY+Fx75cj7OTlOl+nikFoE5BkR3exOYkeCmAY2KgCYyJQn2w3yaBS0tGafUjAIHIHITodrjG+IbjZLhZyG2/jxkMjLNDs0GCWH6vh+mQ9h6Iwzq3UIZnK9zUn2D4cZV5I2StjPpPdAkGrsdIv0L/bQJZjAnidQIWOC5iB7poB" : "b");
     }
 
     public Map<String, String> encrypted_string_Textfield_ListValues() {
@@ -104,24 +124,9 @@ public class ExampleConfiguration extends Configuration {
     static Map<String, String> _encrypted_string_RegexTextfield_ListValues = new HashMap<>();
 
     static {
-        _encrypted_string_RegexTextfield_ListValues.put("Dev", BuildConfig.ENCRYPTED ?
-                "jm9SM4MEYa4FRbTrK23n6QWpBl0MfLolPPUrnaUcMcCzmJbzBT0MumGIEFFthMFbx5ZZta8mCIKYwBR2Cu/2b52rFUr2N8xCuWiWUR"
-                        + "S0erO6sxdY3bJSzRJPo70aGYzMLydVrxUtHv1BjeLTYaG/25hF5JYWf8/TOA4lBRgMsttwbiO+0D6u1qGh4pewpTD5lI"
-                        + "8jK39sY3DfSco7+61chGakI7n44y/+toqxWl8rEa5+I9eL0vDASfe7V2KvBhQGV8FLZDkVo0a0fqcCeq5AXU1bl0bMXI"
-                        + "B2anN1PdihbPjOLZgpllIzuY+Hy8gFfpoCGQRAiiPSI2YDxT+pg2fKUBMQ9OqFAC5fi+7DqfRhy6SRXjfemq5cDglwMG"
-                        + "npRI4JAQ==" : "https://dev.appfigurate.io/list");
-        _encrypted_string_RegexTextfield_ListValues.put("Test", BuildConfig.ENCRYPTED ?
-                "4H4M2YQ2XH+bm7FYVm1sQuN+DaUQdvJecWLKYo3peUYwNJsw+bE/ANFbtfD6xDWCnDW8Bs62tqYDtyg6YhucnTjx82c+axxKG/eDpE"
-                        + "d3nPdiWubrw3UwuWa8xKIH8RFVQyRDpWrCbSDG/rREiRdUUs4Lwer7uJfOa92u9iN56T5rgH7/IXfo2N///FxmN/6Tr2"
-                        + "vVXNVc+m3snBE8B05+4WUKuDLkjGcm" + "HfzlnRiQVyDDyNKDNr1vDoZduu5Fb5CwPfCrxNIJY4r0XFyPIv+pjAG/Z"
-                        + "8Tl2dud6SjCzKirb1Nc0ZeQsCKyhSXDN3PC82qMbviAlkCOvkZ2mca4mRcW1VqeR63Ujp37lCAZKExPdqSlElI4Z0J7/"
-                        + "dHuEyMFNP1/xngi3iuOxO6L7Qy9i/RTnQE=" : "https" + "://test.appfigurate.io/list");
-        _encrypted_string_RegexTextfield_ListValues.put("Prod", BuildConfig.ENCRYPTED ?
-                "IE7X1bkOQGAqCTtLk011hG0Kmj5l0RkSviSO6IfItnIlSEL66ZH1cO4vmN8FtjkWhD+zvcDzHkcsVSsqPrkmYJl29I2otn2dXa9tNI"
-                        + "ZMW3it1kyoyxnZLwzIJhPGORTMxeLN9h+U36lydUA4fASALFFP+uC+bVHVdvIVUMoGBDdoVwZAXyss4C+rgLTafkok4H"
-                        + "cz/a6rXC5SsluX8/LTnomluqfi8bgrSS2xJKKpHsQQllQmsshublBJ57bKn3EeKmo6DxwBuwBVA2nAdyoi1bLUYN+XN1"
-                        + "sjzLaAuYyZeDJGs9qiuj78HCyN4ZrcVe3x00AbNAlSISrZJrw2oMt3exSGFGKAenClYqwoVygDPIPI3vNFCRFcp29N7T"
-                        + "4S78K5AQ==" : "https://m.appfigurate.io/list");
+        _encrypted_string_RegexTextfield_ListValues.put("{DEV}Dev", BuildConfig.ENCRYPTED ? "jm9SM4MEYa4FRbTrK23n6QWpBl0MfLolPPUrnaUcMcCzmJbzBT0MumGIEFFthMFbx5ZZta8mCIKYwBR2Cu/2b52rFUr2N8xCuWiWURS0erO6sxdY3bJSzRJPo70aGYzMLydVrxUtHv1BjeLTYaG/25hF5JYWf8/TOA4lBRgMsttwbiO+0D6u1qGh4pewpTD5lI8jK39sY3DfSco7+61chGakI7n44y/+toqxWl8rEa5+I9eL0vDASfe7V2KvBhQGV8FLZDkVo0a0fqcCeq5AXU1bl0bMXIB2anN1PdihbPjOLZgpllIzuY+Hy8gFfpoCGQRAiiPSI2YDxT+pg2fKUBMQ9OqFAC5fi+7DqfRhy6SRXjfemq5cDglwMGnpRI4JAQ==" : "https://dev.appfigurate.io/list");
+        _encrypted_string_RegexTextfield_ListValues.put("{TEST}Test", BuildConfig.ENCRYPTED ? "4H4M2YQ2XH+bm7FYVm1sQuN+DaUQdvJecWLKYo3peUYwNJsw+bE/ANFbtfD6xDWCnDW8Bs62tqYDtyg6YhucnTjx82c+axxKG/eDpEd3nPdiWubrw3UwuWa8xKIH8RFVQyRDpWrCbSDG/rREiRdUUs4Lwer7uJfOa92u9iN56T5rgH7/IXfo2N///FxmN/6Tr2vVXNVc+m3snBE8B05+4WUKuDLkjGcmHfzlnRiQVyDDyNKDNr1vDoZduu5Fb5CwPfCrxNIJY4r0XFyPIv+pjAG/Z8Tl2dud6SjCzKirb1Nc0ZeQsCKyhSXDN3PC82qMbviAlkCOvkZ2mca4mRcW1VqeR63Ujp37lCAZKExPdqSlElI4Z0J7/dHuEyMFNP1/xngi3iuOxO6L7Qy9i/RTnQE=" : "https://test.appfigurate.io/list");
+        _encrypted_string_RegexTextfield_ListValues.put("{PVT}Prod", BuildConfig.ENCRYPTED ? "IE7X1bkOQGAqCTtLk011hG0Kmj5l0RkSviSO6IfItnIlSEL66ZH1cO4vmN8FtjkWhD+zvcDzHkcsVSsqPrkmYJl29I2otn2dXa9tNIZMW3it1kyoyxnZLwzIJhPGORTMxeLN9h+U36lydUA4fASALFFP+uC+bVHVdvIVUMoGBDdoVwZAXyss4C+rgLTafkok4Hcz/a6rXC5SsluX8/LTnomluqfi8bgrSS2xJKKpHsQQllQmsshublBJ57bKn3EeKmo6DxwBuwBVA2nAdyoi1bLUYN+XN1sjzLaAuYyZeDJGs9qiuj78HCyN4ZrcVe3x00AbNAlSISrZJrw2oMt3exSGFGKAenClYqwoVygDPIPI3vNFCRFcp29N7T4S78K5AQ==" : "https://m.appfigurate.io/list");
     }
 
     public Map<String, String> encrypted_string_RegexTextfield_ListValues() {
@@ -143,17 +148,42 @@ public class ExampleConfiguration extends Configuration {
             regularExpression = "^([1-9]|[1-9][0-9]|[1-9][0-9][0-9])$")
     int integer_RegexTextfield;
 
-    @IntPropertyList(description = "int - fixed list", keys = {"None", "Low", "Zero", "High", "Urgent"},
-            values = {-100, -50, 0, 50, 100})
+    @IntPropertyList(description = "int - fixed list", keys = {
+            "None",
+            "{DEV}Low",
+            "{PVT}Zero",
+            "High",
+            "{TEST}Urgent"
+    }, values = {
+            -100,
+            -50,
+            0,
+            50,
+            100
+    })
     int integer_List;
 
-    @IntPropertyListEdit(description = "int - textfield, customizable list", minValue = 0, maxValue = 100,
-            keys = {"Failed", "Pass", "Excellence"}, values = {0, 80, 90})
+    @IntPropertyListEdit(description = "int - textfield, customizable list", minValue = 0, maxValue = 100, keys = {
+            "Failed",
+            "Pass",
+            "Excellence"
+    }, values = {
+            0,
+            80,
+            90
+    })
     int integer_Textfield_List;
 
-    @IntPropertyListEdit(description = "int - textfield with regex, customizable list", minValue = 0,
-            maxValue = 365, regularExpression = "^(0?[0-9]?[0-9]|[1-2][0-9][0-9]|3[0-5][0-9]|36[0-5])$",
-            keys = {"0 days", "1 month", "1 Year"}, values = {0, 30, 365})
+    @IntPropertyListEdit(description = "int - textfield with regex, customizable list", minValue = 0, maxValue = 365,
+            regularExpression = "^(0?[0-9]?[0-9]|[1-2][0-9][0-9]|3[0-5][0-9]|36[0-5])$", keys = {
+            "0 days",
+            "1 month",
+            "1 Year"
+    }, values = {
+            0,
+            30,
+            365
+    })
     int integer_RegexTextfield_List;
 
     // endregion int
@@ -171,17 +201,44 @@ public class ExampleConfiguration extends Configuration {
             regularExpression = "^(?:[1-9]\\d*|0)?(?:\\.\\d+)?$")
     float float_RegexTextfield;
 
-    @FloatPropertyList(description = "float - fixed list", keys = {"None", "Low", "Zero", "High", "Urgent"},
-            values = {-100.0f, -50.0f, 0.0f, 50.0f, 100.0f})
+    @FloatPropertyList(description = "float - fixed list", keys = {
+            "None",
+            "Low",
+            "Zero",
+            "High",
+            "Urgent"
+    }, values = {
+            -100.0f,
+            -50.0f,
+            0.0f,
+            50.0f,
+            100.0f
+    })
     float float_List;
 
     @FloatPropertyListEdit(description = "float - textfield, customizable list", minValue = 0.0f, maxValue = 100.0f,
-            keys = {"Failed", "Pass", "Excellence"}, values = {0.0f, 80.0f, 90.0f})
+            keys = {
+                    "Failed",
+                    "Pass",
+                    "Excellence"
+            }, values = {
+            0.0f,
+            80.0f,
+            90.0f
+    })
     float float_Textfield_List;
 
     @FloatPropertyListEdit(description = "Float - textfield with regex, customizable list", minValue = 0.0f,
             maxValue = 366.0f, regularExpression = "^(0?[0-9]?[0-9]|[1-2][0-9][0-9]|3[0-5][0-9]|36[0-5])?(?:\\.\\d+)?$",
-            keys = {"0 days", "1 month", "1 Year"}, values = {0.0f, 30.0f, 365.0f})
+            keys = {
+                    "0 days",
+                    "1 month",
+                    "1 Year"
+            }, values = {
+            0.0f,
+            30.0f,
+            365.0f
+    })
     float float_RegexTextfield_List;
 
     // endregion float
@@ -199,46 +256,83 @@ public class ExampleConfiguration extends Configuration {
             regularExpression = "^(?:[1-9]\\d*|0)?(?:\\.\\d+)?$")
     double double_RegexTextfield;
 
-    @DoublePropertyList(description = "double - fixed list", keys = {"None", "Low", "Zero", "High", "Urgent"},
-            values = {-100.0d, -50.0d, 0.0d, 50.0d, 100.0d}, restart = true)
+    @DoublePropertyList(description = "double - fixed list", keys = {
+            "None",
+            "Low",
+            "Zero",
+            "High",
+            "Urgent"
+    }, values = {
+            -100.0d,
+            -50.0d,
+            0.0d,
+            50.0d,
+            100.0d
+    }, restart = true)
     double double_List;
 
     @DoublePropertyListEdit(description = "double - textfield, customizable list", minValue = 0.0d, maxValue = 100.0d,
-            keys = {"Failed", "Passed", "Excellence"}, values = {0.0d, 80.0d, 90.0d})
+            keys = {
+                    "Failed",
+                    "Passed",
+                    "Excellence"
+            }, values = {
+            0.0d,
+            80.0d,
+            90.0d
+    })
     double double_Textfield_List;
 
     @DoublePropertyListEdit(description = "double - textfield with regex, customizable list", minValue = 0.0d,
             maxValue = 366.0d, regularExpression = "^(0?[0-9]?[0-9]|[1-2][0-9][0-9]|3[0-5][0-9]|36[0-5])?(?:\\.\\d+)?$",
-            keys = {"0 days", "1 month", "1 Year"}, values = {0.0d, 30.0d, 365.0d})
+            keys = {
+                    "0 days",
+                    "1 month",
+                    "1 Year"
+            }, values = {
+            0.0d,
+            30.0d,
+            365.0d
+    })
     double double_RegexTextfield_List;
 
     // endregion double
 
     // region Action Methods
 
-    int randomInt(int min, int max) {
-        Random random = new Random();
-        return random.nextInt((max + 1) - min) + min;
-    }
-
     @ActionMethod(description = "Set all integer properties to random values", restart = true)
     public void randomIntegers() {
-        integer_Slider = randomInt(0, 1000);
-        integer_Textfield = randomInt(10, 20);
-        integer_RegexTextfield = randomInt(1, 999);
-        switch (randomInt(0, 4)) {
-            case 0: integer_List = -100; break;
-            case 1: integer_List = -50; break;
-            case 2: integer_List = 0; break;
-            case 3: integer_List = 50; break;
-            default: integer_List = 100;
+        Random random = new Random();
+        integer_Slider = random.nextInt(1001);
+        integer_Textfield = random.nextInt(11) + 10;
+        integer_RegexTextfield = random.nextInt(999) + 1;
+        switch (random.nextInt(5)) {
+            case 0:
+                integer_List = -100;
+                break;
+            case 1:
+                integer_List = -50;
+                break;
+            case 2:
+                integer_List = 0;
+                break;
+            case 3:
+                integer_List = 50;
+                break;
+            default:
+                integer_List = 100;
         }
-        switch (randomInt(0, 3)) {
-            case 0: integer_Textfield_List = 0; break;
-            case 1: integer_Textfield_List = 80; break;
-            default: integer_Textfield_List = 90;
+        switch (random.nextInt(3)) {
+            case 0:
+                integer_Textfield_List = 0;
+                break;
+            case 1:
+                integer_Textfield_List = 80;
+                break;
+            default:
+                integer_Textfield_List = 90;
         }
-        integer_RegexTextfield_List = randomInt(0, 365);
+        integer_RegexTextfield_List = random.nextInt(366);
     }
 
     @ActionMethod(description = "Reset integer properties to defaults", restart = true)
@@ -253,25 +347,33 @@ public class ExampleConfiguration extends Configuration {
 
     // endregion Action Methods
 
+    @Override
     public boolean allowInvalidSignatures() {
         return BuildConfig.DEBUG;
     }
 
+    @NonNull
+    @Override
     public String publicKey() {
         // 41 36 87 71 0D 05
-        return "-----BEGIN PUBLIC KEY-----\n"
-                + "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4TZnKfGeXttN7Rr3eiAZ\n"
-                + "PMEPsZvbo7lgIpMh6OjgBsoqkJJP0yXXLtpqsBCv8vm7RYqCn5+yfkiCQiXvkJBz\n"
-                + "FSKmLF9EPR9l1H+32Id82dDuseD70D66puPUHjciEgmU18DpW2NVvTAykMwTEsiR\n"
-                + "0h/ExBEhUe75qtwlVno8cMFbEfVtiGbKECvWIr122ED71T0Jt2Bcxqx1a7c1hPIV\n"
-                + "RwLxIfWfE0+2rB9nJVPBgsTVPywibDvjio82FousyMDmvkAbMq5iyuyvJ0+5bATz\n"
-                + "o12GEt5lSiQlCMzfmkWYBROMDCh27qGFVVo1XAUCVsMfsW9n4iQcoLAdUp/LI3B3\n"
-                + "ywIDAQAB\n"
-                + "-----END PUBLIC KEY-----\n";
+        return "-----BEGIN PUBLIC KEY-----\n" +
+                "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4TZnKfGeXttN7Rr3eiAZ\n" +
+                "PMEPsZvbo7lgIpMh6OjgBsoqkJJP0yXXLtpqsBCv8vm7RYqCn5+yfkiCQiXvkJBz\n" +
+                "FSKmLF9EPR9l1H+32Id82dDuseD70D66puPUHjciEgmU18DpW2NVvTAykMwTEsiR\n" +
+                "0h/ExBEhUe75qtwlVno8cMFbEfVtiGbKECvWIr122ED71T0Jt2Bcxqx1a7c1hPIV\n" +
+                "RwLxIfWfE0+2rB9nJVPBgsTVPywibDvjio82FousyMDmvkAbMq5iyuyvJ0+5bATz\n" +
+                "o12GEt5lSiQlCMzfmkWYBROMDCh27qGFVVo1XAUCVsMfsW9n4iQcoLAdUp/LI3B3\n" +
+                "ywIDAQAB\n" +
+                "-----END PUBLIC KEY-----\n";
     }
 
+    @Override
+    public String[] environmentTags() {
+        return new String[]{"Dev", "Test", "PVT"};
+    }
+
+    @Override
     public void reset() {
-        super.reset();
         this.bool = true;
         this.string_Textfield = "tuesday";
         this._string_RegexTextfield = "bot";

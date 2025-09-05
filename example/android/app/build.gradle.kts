@@ -49,5 +49,5 @@ flutter {
 }
 
 dependencies {
-    implementation("nz.co.electricbolt:appfiguratelibrary:3.1.0")
+    implementation("nz.co.electricbolt:appfiguratelibrary:4.0.2")
 }
