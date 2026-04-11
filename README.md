@@ -1,6 +1,6 @@
 # Appfigurate™ Flutter Example
 
-Demonstrates how to integrate Appfigurate SDK into a Flutter iOS and Android app.
+Demonstrates how to integrate Appfigurate SDK into a Flutter iOS app.
 
 Documentation for Appfigurate is available at [electricbolt.gitbook.io](https://electricbolt.gitbook.io).
 
