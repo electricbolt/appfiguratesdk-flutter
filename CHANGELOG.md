@@ -1,5 +1,9 @@
 ### Release History
 
+#### 5.0.0 3 May 2026
+
+* Remove support for Android.
+
 #### 4.0.2 5 Sep 2025
 
 * Locally override third party remote provider configuration/feature toggles/flags. Tested and documented providers include Firebase Remote Config and Launch Darkly.

@@ -12,7 +12,7 @@ let package = Package(
         .library(name: "appfigurateflutter", targets: ["appfigurateflutter"])
     ],
     dependencies: [
-        .package(url: "https://github.com/electricbolt/appfiguratesdk", exact: "4.0.2")
+        .package(url: "https://github.com/electricbolt/appfiguratesdk", exact: "5.0.0")
     ],
     targets: [
         .target(

@@ -1,15 +1,14 @@
 {
-  "originHash" : "ee33e637d41d60f6377c724e19814dba3dd9f4434e3d86a0a69b8b71b24650d7",
   "pins" : [
     {
       "identity" : "appfiguratesdk",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/electricbolt/appfiguratesdk.git",
+      "location" : "https://github.com/electricbolt/appfiguratesdk",
       "state" : {
-        "revision" : "7aabb1c06d1c916bc7d298661f81279515b2f012",
-        "version" : "4.0.2"
+        "branch" : "develop_5.0.0",
+        "revision" : "cb967fdba334cc1fa53486bfb586ebb451f33eef"
       }
     }
   ],
-  "version" : 3
+  "version" : 2
 }

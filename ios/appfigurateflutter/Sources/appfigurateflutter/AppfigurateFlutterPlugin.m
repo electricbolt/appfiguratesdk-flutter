@@ -1,14 +1,8 @@
 // AppfigurateFlutterPlugin.m
-// Appfigurate™ Copyright© 2022-2024; Electric Bolt Limited.
+// Appfigurate™ Copyright© 2022-2025; Electric Bolt Limited.
 
 #import "AppfigurateFlutterPlugin.h"
 @import AppfigurateLibrary;
-
-@interface APLConfiguration ()
-
-- (NSDictionary* _Nullable) dictionaryFromConfiguration;
-
-@end
 
 @interface AppfigurateFlutterPlugin () <APLConfigurationUpdated> {
     FlutterMethodChannel* channel;
@@ -37,13 +31,16 @@
 }
 
 + (void) registerWithRegistrar: (nonnull NSObject<FlutterPluginRegistrar>*) registrar {
+    APLDEBUG(@"Plugin: +registerWithRegistrar:");
     [[AppfigurateFlutterPlugin sharedInstance] registerWithRegistrar: registrar];
 }
 
 - (void) registerWithRegistrar: (NSObject<FlutterPluginRegistrar>*) registrar {
+    APLDEBUG(@"Plugin: registerWithRegistrar:");
     channel = [FlutterMethodChannel methodChannelWithName: @"appfiguratelibrary" binaryMessenger: [registrar messenger]];
     [registrar addMethodCallDelegate: [AppfigurateFlutterPlugin sharedInstance] channel: channel];
     [registrar addApplicationDelegate: self];
+    [registrar addSceneDelegate: self];
 }
 
 #pragma mark FlutterPlugin
@@ -55,9 +52,27 @@
     return YES;
 }
 
+/// For apps not using UIApplicationSceneManifest, whilst app is running.
+
 - (BOOL) application:(UIApplication*) application openURL: (NSURL*) url options: (NSDictionary<UIApplicationOpenURLOptionsKey, id>*) options {
     APLDEBUG(@"Plugin: application:openURL:options:");
     return APLApplicationOpenURL(url);
+}
+
+/// For apps using UIApplicationSceneManifest, whilst app is running.
+
+- (void)scene:(UIScene *)scene openURLContexts:(NSSet<UIOpenURLContext *> *)URLContexts {
+    APLDEBUG(@"Plugin: openURLContexts:");
+    NSURL* url = [[[URLContexts allObjects] firstObject] URL];
+    APLApplicationOpenURL(url);
+}
+
+/// For apps using UIApplicationSceneManifest, at app startup.
+
+- (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions {
+    APLDEBUG(@"Plugin: scene:willContentToSession:options:");
+    NSURL* url = [[[connectionOptions.URLContexts allObjects] firstObject] URL];
+    APLApplicationOpenURL(url);
 }
 
 - (void) handleMethodCall: (FlutterMethodCall*) call result: (FlutterResult) result {
@@ -94,4 +109,3 @@
 }
 
 @end
-

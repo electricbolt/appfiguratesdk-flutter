@@ -4,6 +4,6 @@
 @import Foundation;
 @import Flutter;
 
-@interface AppfigurateFlutterPlugin : NSObject<FlutterPlugin>
+@interface AppfigurateFlutterPlugin : NSObject<FlutterPlugin, FlutterSceneLifeCycleDelegate>
     
 @end

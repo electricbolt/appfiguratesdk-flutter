@@ -1,11 +1,11 @@
 name: appfigurateflutter
-description: Appfigurate SDK flutter plugin for iOS and Android mobile apps.
-version: 4.0.2
+description: Appfigurate SDK flutter plugin for iOS mobile apps.
+version: 5.0.0
 homepage: https://www.electricbolt.co.nz
 
 environment:
-  sdk: ">=2.16.2 <4.0.0"
-  flutter: ">=3.0.0"
+  sdk: ">=3.1.0 <4.0.0"
+  flutter: ">=3.41.0"
 
 dependencies:
   flutter:
@@ -19,8 +19,5 @@ dev_dependencies:
 flutter:
   plugin:
     platforms:
-      android:
-        package: nz.co.electricbolt.appfigurateflutter
-        pluginClass: AppfigurateFlutterPlugin
       ios:
         pluginClass: AppfigurateFlutterPlugin

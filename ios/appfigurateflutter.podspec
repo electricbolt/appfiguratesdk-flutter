@@ -5,14 +5,14 @@
 
 Pod::Spec.new do |s|
   s.name                = 'appfigurateflutter'
-  s.version             = '4.0.2'
+  s.version             = '5.0.0'
   s.module_name         = 'AppfigurateFlutter'
   s.summary             = 'Appfigurate SDK Flutter Plugin'
 
   s.description         = <<-DESC
 # Appfigurate™ Flutter Example
-Demonstrates how to integrate Appfigurate SDK into a Flutter iOS and Android app.
-Documentation for Appfigurate is available at https://docs.electricbolt.co.nz
+Demonstrates how to integrate Appfigurate SDK into a Flutter iOS app.
+Documentation for Appfigurate is available at https://electricbolt.gitbook.io
 Appfigurate is a trademark of Electric Bolt, registered in New Zealand.
 DESC
 

@@ -64,76 +64,49 @@ late String _cachedDescription;
 late String _cachedModifications;
 
 /// Subclass [APLNativeConfiguration] to provide read only introspection of the
-/// properties implemented in the native app's [APLConfiguration] (iOS) /
-/// [nz.co.electricbolt.appfiguratelibrary.Configuration] (Android) subclass.
+/// properties implemented in the native app's [APLConfiguration] subclass.
 ///
-/// For any properties that you with to introspect in Dart, implement as
-/// follows depending on the type declared in Obj-C / Swift / Java / Kotlin:
+/// For any properties that you with to introspect in Dart, implement as follows
+/// depending on the type declared in Obj-C / Swift:
 ///
 /// ```
 /// -- Boolean --
 ///
 /// Dart:  bool get propertyName => nativeBool('propertyName');
 ///
-/// Obj-C:  BOOL_PROPERTY(propertyName, ...);
 /// Swift:  @BoolProperty(...) var propertyName: Bool
-/// Java:   @BooleanProperty(...) boolean propertyName;
-/// Kotlin: @BooleanProperty(...) var propertyName = false
+/// Obj-C:  BOOL_PROPERTY(propertyName, ...);
 ///
 /// -- String / Encrypted String --
 ///
 /// Dart:  String get propertyName => nativeString('propertyName');
 ///
-/// Obj-C:  STRING_PROPERTY_EDIT(propertyName, ...);
-///         STRING_PROPERTY_LIST(propertyName, ...);
-///         STRING_PROPERTY_LIST_EDIT(propertyName, ...);
-///         ENCRYPTED_STRING_PROPERTY_LIST_EDIT(propertyName, ...);
 /// Swift:  @StringPropertyEdit(...) var propertyName: String
 ///         @StringPropertyList(...) var propertyName: String
 ///         @StringPropertyListEdit(...) var propertyName: String
 ///         @EncryptedStringPropertyListEdit(...) var propertyName: String
-/// Java:   @StringPropertyEdit(...) String propertyName;
-///         @StringPropertyList(...) String propertyName;
-///         @StringPropertyListEdit(...) String propertyName;
-///         @EncryptedStringPropertyListEdit(...) String propertyName;
-/// Kotlin: @StringPropertyEdit(...) var propertyName: String? = null
-///         @StringPropertyList(...) var propertyName: String? = null
-///         @StringPropertyListEdit(...) var propertyName: String? = null
-///         @EncryptedStringPropertyListEdit(...) var propertyName: String? = null
+/// Obj-C:  STRING_PROPERTY_EDIT(propertyName, ...);
+///         STRING_PROPERTY_LIST(propertyName, ...);
+///         STRING_PROPERTY_LIST_EDIT(propertyName, ...);
+///         ENCRYPTED_STRING_PROPERTY_LIST_EDIT(propertyName, ...);
 ///
 /// -- Integer --
 ///
 /// Dart:  int get propertyName => nativeInt('propertyName');
 ///
-/// Obj-C:  INT_PROPERTY_SLIDER(propertyName, ...);
-///         INT_PROPERTY_EDIT(propertyName, ...);
-///         INT_PROPERTY_LIST(propertyName, ...);
-///         INT_PROPERTY_LIST_EDIT(propertyName ...);
 /// Swift:  @IntPropertySlider(...) var propertyName: Int
 ///         @IntPropertyEdit(...) var propertyName: Int
 ///         @IntPropertyList(...) var propertyName: Int
 ///         @IntPropertyListEdit(...) var propertyName: Int
-/// Java:   @IntPropertySlider(...) int propertyName;
-///         @IntPropertyEdit(...) int propertyName;
-///         @IntPropertyList(...) int propertyName;
-///         @IntPropertyListEdit(...) int propertyName;
-/// Kotlin: @IntPropertySlider(...) var propertyName = 0
-///         @IntPropertyEdit(...) var propertyName = 0
-///         @IntPropertyList(...) var propertyName = 0
-///         @IntPropertyListEdit(...) var propertyName = 0
+/// Obj-C:  INT_PROPERTY_SLIDER(propertyName, ...);
+///         INT_PROPERTY_EDIT(propertyName, ...);
+///         INT_PROPERTY_LIST(propertyName, ...);
+///         INT_PROPERTY_LIST_EDIT(propertyName ...);
 ///
 /// -- Float / Double --
 ///
 /// Dart:  double get propertyName => nativeDouble('propertyName');
 ///
-/// Obj-C:  FLOAT_PROPERTY_SLIDER(propertyName, ...);
-///         FLOAT_PROPERTY_EDIT(propertyName, ...);
-///         FLOAT_PROPERTY_LIST(propertyName, ...);
-///         FLOAT_PROPERTY_LIST_EDIT(propertyName, ...);
-///         DOUBLE_PROPERTY_SLIDER(propertyName, ...);
-///         DOUBLE_PROPERTY_EDIT(propertyName, ...);
-///         DOUBLE_PROPERTY_LIST(propertyName, ...);
-///         DOUBLE_PROPERTY_LIST_EDIT(propertyName, ...);
 /// Swift:  @FloatPropertySlider(...) var propertyName: Float
 ///         @FloatPropertyEdit(...) var propertyName: Float
 ///         @FloatPropertyList(...) var propertyName: Float
@@ -142,22 +115,14 @@ late String _cachedModifications;
 ///         @DoublePropertyEdit(...) var propertyName: Double
 ///         @DoublePropertyList(...) var propertyName: Double
 ///         @DoublePropertyListEdit(...) var propertyName: Double
-/// Java:   @FloatPropertySlider(...) float propertyName;
-///         @FloatPropertyEdit(...) float propertyName;
-///         @FloatPropertyList(...) float propertyName;
-///         @FloatPropertyListEdit(...) float propertyName;
-///         @DoublePropertySlider(...) double propertyName;
-///         @DoublePropertyEdit(...) double propertyName;
-///         @DoublePropertyList(...) double propertyName;
-///         @DoublePropertyListEdit(...) double propertyName;
-/// Kotlin: @FloatPropertySlider(...) var propertyName = 0.0f
-///         @FloatPropertyEdit(...) var propertyName = 0.0f
-///         @FloatPropertyList(...) var propertyName = 0.0f
-///         @FloatPropertyListEdit(...) var propertyName = 0.0f
-///         @DoublePropertySlider(...) var propertyName = 0.0
-///         @DoublePropertyEdit(...) var propertyName = 0.0
-///         @DoublePropertyList(...) var propertyName = 0.0
-///         @DoublePropertyListEdit(...) var propertyName = 0.0
+/// Obj-C:  FLOAT_PROPERTY_SLIDER(propertyName, ...);
+///         FLOAT_PROPERTY_EDIT(propertyName, ...);
+///         FLOAT_PROPERTY_LIST(propertyName, ...);
+///         FLOAT_PROPERTY_LIST_EDIT(propertyName, ...);
+///         DOUBLE_PROPERTY_SLIDER(propertyName, ...);
+///         DOUBLE_PROPERTY_EDIT(propertyName, ...);
+///         DOUBLE_PROPERTY_LIST(propertyName, ...);
+///         DOUBLE_PROPERTY_LIST_EDIT(propertyName, ...);
 /// ```
 
 abstract class APLNativeConfiguration {
@@ -168,10 +133,8 @@ abstract class APLNativeConfiguration {
     _instance = this;
   }
 
-  /// Introspect the native app's [APLConfiguration] (iOS) /
-  /// [nz.co.electricbolt.appfiguratelibrary.Configuration] (Android) subclass
-  /// for the `NSString` (Obj-C), `String` (Swift, Java, Kotlin) with the
-  /// [propertyName] specified.
+  /// Introspect the native app's [APLConfiguration] subclass for the
+  /// `NSString` (Obj-C), `String` (Swift) with the [propertyName] specified.
 
   String nativeString(String propertyName) {
     Object? object = _cachedConfiguration[propertyName];
@@ -181,10 +144,8 @@ abstract class APLNativeConfiguration {
     return '';
   }
 
-  /// Introspect the native app's [APLConfiguration] (iOS) /
-  /// [nz.co.electricbolt.appfiguratelibrary.Configuration] (Android) subclass
-  /// for the `NSInteger` (Obj-C), `Int` (Swift, Kotlin), `int` (Java) with the
-  /// [propertyName] specified.
+  /// Introspect the native app's [APLConfiguration] subclass for the
+  /// `NSInteger` (Obj-C), `Int` (Swift) with the [propertyName] specified.
 
   int nativeInt(String propertyName) {
     Object? object = _cachedConfiguration[propertyName];
@@ -194,10 +155,8 @@ abstract class APLNativeConfiguration {
     return 0;
   }
 
-  /// Introspect the native app's [APLConfiguration] (iOS) /
-  /// [nz.co.electricbolt.appfiguratelibrary.Configuration] (Android) subclass
-  /// for the `BOOL` (Obj-C), `Bool` (Swift), `boolean` (Java),
-  /// `Boolean` (Kotlin) with the [propertyName] specified.
+  /// Introspect the native app's [APLConfiguration] subclass for the
+  /// `BOOL` (Obj-C), `Bool` (Swift) with the [propertyName] specified.
 
   bool nativeBool(String propertyName) {
     Object? object = _cachedConfiguration[propertyName];
@@ -207,10 +166,9 @@ abstract class APLNativeConfiguration {
     return false;
   }
 
-  /// Introspect the native app's [APLConfiguration] (iOS) /
-  /// [nz.co.electricbolt.appfiguratelibrary.Configuration] (Android) subclass
-  /// for the `float` / `double` (Obj-C, Java), `Float` / `Double`
-  /// (Swift, Kotlin) with the [propertyName] specified.
+  /// Introspect the native app's [APLConfiguration] subclass for the
+  /// `float` / `double` (Obj-C), `Float` / `Double` (Swift) with the
+  /// [propertyName] specified.
 
   double nativeDouble(String propertyName) {
     Object? object = _cachedConfiguration[propertyName];
@@ -223,8 +181,8 @@ abstract class APLNativeConfiguration {
   /// Returns the textual representation of all properties.
   ///
   /// Property names are shortened to camel case and appended with the value,
-  /// except for `NSString` (Obj-C) / `String` (Swift, Java, Kotlin) properties
-  /// which omit the property name.
+  /// except for `NSString` (Obj-C) / `String` (Swift) properties which omit the
+  /// property name.
   ///
   /// e.g. `debugLog=5` would be returned as `DL=5`.
 
@@ -235,9 +193,9 @@ abstract class APLNativeConfiguration {
   /// Returns the textual representation of all properties that have non default
   /// (overridden) values.
   ///
-  /// Property names are shortened to camel case and appended with the
-  /// non default value, except for `NSString` (Obj-C)  / `String` (Swift, Java,
-  /// Kotlin) properties which omit the property name.
+  /// Property names are shortened to camel case and appended with the non
+  /// default value, except for `NSString` (Obj-C)  / `String` (Swift)
+  /// properties which omit the property name.
   ///
   /// e.g. `userInteractionTimeout=60.0` would be returned as `UIT=60.0`.
 
@@ -309,10 +267,8 @@ void APLRemoveConfigurationUpdatedListener(
 /// When true, Appfigurate library debugging messages will be output to the
 /// console. The default is false.
 ///
-/// It is best practice to distribute applications via TestFlight / App Store /
-/// Google Play with logging set to false. See also 'APLLogging' key in the
-/// (iOS, watchOS) Info.plist file or (Android) meta-data in AndroidManifest.xml
-/// file.
+/// It is best practice to distribute applications via TestFlight / App Store
+/// with logging set to false. See also 'APLLogging' key in the Info.plist file.
 
 Future<void> APLSetLogging(bool logging) async {
   assert(_libraryInitialized);
@@ -321,13 +277,11 @@ Future<void> APLSetLogging(bool logging) async {
 
 //------------------------------------------------------------------------------
 
-/// Saves the configuration persisted in the Keychain (iOS) / SharedPreferences
-/// (Android) into temporary storage.
+/// Saves the configuration persisted in the Keychain into temporary storage.
 ///
-/// Some apps have functionality to erase the Keychain / SharedPreferences to
-/// reset apps back to *factory defaults*, which has the side effect of
-/// *removing* any Appfigurate configuration persisted in the Keychain / shared
-/// preferences.
+/// Some apps have functionality to erase the Keychain to reset apps back to
+/// *factory defaults*, which has the side effect of *removing* any Appfigurate
+/// configuration persisted in the Keychain.
 ///
 /// See also [APLRestoreConfiguration].
 
@@ -338,8 +292,7 @@ Future<void> APLSaveConfiguration() async {
 
 //------------------------------------------------------------------------------
 
-/// Restores the configuration from temporary storage back into the Keychain
-/// (iOS) / SharedPreferences (Android).
+/// Restores the configuration from temporary storage back into the Keychain.
 ///
 /// See also [APLSaveConfiguration]
 
